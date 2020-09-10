@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { PageHeader, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
+import { PageHeader,Tree, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar, Table } from 'antd';
 import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
@@ -13,7 +13,55 @@ const { SubMenu } = Menu;
 function onPanelChange(value, mode) {
     console.log(value, mode);
 }
+const { DirectoryTree } = Tree;
+const columns = [
+    {
+      title: '',
+      dataIndex: 'a',
+      key: 'a',
+    },
+    {
+      title: '',
+      dataIndex: 'b',
+      key: 'b',
+    },
+  ];
+const dataSource = [
+    {
+      key: '1',
+      a: 'style',
+      b: 'simple cacilation',
+    },
+    {
+      key: '2',
+      a: 'Categories',
+      b: '地理信息服务/处理服务',
+    },
+  ];
 
+const treeData = [
+  {
+    title: '地理信息服务',
+    key: '0-0',
+    children: [
+      { title: '处理服务', key: '0-0-0', children:[
+          { title: '缓冲区分析', key: '0-0-0-0', isLeaf: true },
+        ] },
+    ],
+  },
+  {
+    title: '遥感信息服务',
+    key: '0-1',
+    children: [
+      { title: '数据服务', key: '0-1-0', children:[
+        { title: 'Landsat', key: '0-1-0-0', isLeaf: true },
+      ] },
+      { title: '处理服务', key: '0-1-1', children:[
+        { title: '变化检测', key: '0-1-1-0', isLeaf: true },
+      ] },
+    ],
+  },
+];
 class SingleCall extends Component{
     constructor(){
         super();
@@ -70,73 +118,30 @@ class SingleCall extends Component{
                                     </SubMenu>
                                 </Menu>
                             </Sider>
-                            <Content className="contentmain" style={{ padding: '0 24px'}}>
-                            <div className="site-card-wrapper">
-                                <Row gutter={[16,16]}>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="应用数量"
-                                                value={29}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="服务数量"
-                                                value={36254}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="用户数量"
-                                                value={861}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="访问次数"
-                                                value={135123}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                </Row>
-                                <Row gutter={[16, 16]}>
-                                <Col span={8}>
-                                        <Card >
-                                            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card >
-                                            <div id="cardline"></div>
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card title="Card title" >
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </div>
+                            <Content style={{ padding: '0 50px' }}>
+                                <p>单个服务调用</p>
+                                <Card>
+                                <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
+                                    <Sider className="site-layout-background" width={200}>
+                                        <DirectoryTree
+                                            multiple
+                                            defaultExpandAll
+                                            treeData={treeData}
+                                        />
+                                        
+                                    </Sider>
+                                    <Content>
+                                        <Space direction="vertical">
+                                            <h4>缓冲区分析服务</h4>
+                                            <p>缓冲区分析是指以点、线、面实体为基础，自动建立其周围一定宽度范围内的缓冲区多边形图层，然后建立该图层与目标图层的叠加，进行分析而得到所需结果。它是用来解决邻近度问题的空间分析工具之一。邻近度描述了地理空间中两个地物距离相近的程度。</p>
+                                            <p>详细描述</p>
+                                            <Table dataSource={dataSource} columns={columns} showHeader={false} pagination={false}/>
+                                            <div className="divheight"></div>
+                                            <Button type="primary">Invoke</Button>
+                                        </Space>
+                                    </Content>
+                                </Layout>
+                                </Card>
                             </Content>
                         </Layout>
                     </Content>

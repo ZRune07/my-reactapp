@@ -1,15 +1,46 @@
 import React, {Component} from "react";
-import { PageHeader, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
+import { PageHeader,Table,Tag,Select, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
 import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
-import Reactecharts from 'echarts-for-react';
+import 'moment/locale/zh-cn';
 import  'echarts/lib/chart/line';
+import Search from "antd/lib/input/Search";
 moment.locale('zh-cn');
+const { Column, ColumnGroup } = Table;
+const { Option } = Select;
 const { Header, Content, Footer,Sider } = Layout;
 const { SubMenu } = Menu;
-
+const data = [
+    {
+      key: '1',
+      ID: '1',
+      Name: 'Ostu Service',
+      Version: 'V1.1.2',
+      Type: 'Private',
+      Time: '2020.09.01 13:13',
+      tags: ['Online'],
+    },
+    {
+      key: '2',
+      ID: '2',
+      Name: 'RF Service',
+      Version: 'V1.1.2',
+      Type: 'Public',
+      Time: '2020.09.01 13:13',
+      tags: ['Online'],
+    },
+    {
+      key: '3',
+      ID: '3',
+      Name: 'CD Service',
+      Version: 'V1.1.2',
+      Type: 'Private',
+      Time: '2020.09.01 13:13',
+      tags: ['Offline'],
+    },
+  ];
 function onPanelChange(value, mode) {
     console.log(value, mode);
 }
@@ -21,6 +52,9 @@ class Sinfo extends Component{
     }
     
     render(){
+        const rowSelection = {
+            checkStrictly : 0
+          };
         return (
                 <Layout>
                     <PageHeader
@@ -72,70 +106,55 @@ class Sinfo extends Component{
                             </Sider>
                             <Content className="contentmain" style={{ padding: '0 24px'}}>
                             <div className="site-card-wrapper">
-                                <Row gutter={[16,16]}>
-                                    <Col span={6}>
+                                <p>处理服务基础信息</p>
+                                        <Card>
+                                            <p>查找服务</p>
+                                            <Input.Group compact>
+                                                <Select defaultValue="username">
+                                                    <Option value="name">Name</Option>
+                                                    <Option value="type">Type</Option>
+                                                </Select>
+                                                <Search style={{ width: '50%' }} placeholder="input search text" enterButton="Search" onSearch={value => console.log(value)}/>
+                                            </Input.Group>
+                                        </Card>
                                         <Card >
-                                            <Statistic
-                                                title="应用数量"
-                                                value={29}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
+                                        <Table dataSource={data} rowSelection={rowSelection}>
+                                            <Column title="ID" dataIndex="ID" key="ID" />
+                                            <Column title="Name" dataIndex="Name" key="Name" />
+                                            <Column title="Version" dataIndex="Version" key="Version" />
+                                            <Column title="Type" dataIndex="Type" key="Type" />
+                                            <Column
+                                                title="Status"
+                                                dataIndex="tags"
+                                                key="tags"
+                                                render={tags => (
+                                                    <>
+                                                    {tags.map(tag => (
+                                                        tag == "Online" ?
+                                                        <Tag color="green" key={tag}>
+                                                        {tag}
+                                                        </Tag>
+                                                        :
+                                                        <Tag color="red" key={tag}>
+                                                        {tag}
+                                                        </Tag>
+                                                    ))}
+                                                    </>
+                                                )}
+                                                />
+                                                <Column title="Creat Time" dataIndex="Time" key="Time" />
+                                                <Column
+                                                title="操作"
+                                                key="action"
+                                                render={(text, record) => (
+                                                    <Space size="middle">
+                                                    <a>操作</a>
+                                                    <a>删除</a>
+                                                    </Space>
+                                                )}
+                                                />
+                                            </Table>
                                         </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="服务数量"
-                                                value={36254}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="用户数量"
-                                                value={861}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="访问次数"
-                                                value={135123}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                </Row>
-                                <Row gutter={[16, 16]}>
-                                <Col span={8}>
-                                        <Card >
-                                            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card >
-                                            <div id="cardline"></div>
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card title="Card title" >
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                </Row>
                             </div>
                             </Content>
                         </Layout>

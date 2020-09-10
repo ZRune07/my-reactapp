@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import { PageHeader, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
+import { PageHeader, Form, Input, Button,Radio,Upload, message, Checkbox,Layout, Menu,InputNumber, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
 import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
+import {HomeOutlined,UploadOutlined ,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
 import Reactecharts from 'echarts-for-react';
 import  'echarts/lib/chart/line';
@@ -13,13 +13,51 @@ const { SubMenu } = Menu;
 function onPanelChange(value, mode) {
     console.log(value, mode);
 }
+const layout = {
+    labelCol: { span: 4 },
+    wrapperCol: { span: 8 },
+  };
+  
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not validate email!',
+      number: '${label} is not a validate number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    },
+  };
+
+  const props = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
 
 class MatlabPub extends Component{
     constructor(){
         super();
         this.state = {};
     }
-    
+    onChange = e => {
+        console.log('radio checked', e.target.value);
+        this.setState({
+          value: e.target.value,
+        });
+      };
     render(){
         return (
                 <Layout>
@@ -71,72 +109,39 @@ class MatlabPub extends Component{
                                 </Menu>
                             </Sider>
                             <Content className="contentmain" style={{ padding: '0 24px'}}>
-                            <div className="site-card-wrapper">
-                                <Row gutter={[16,16]}>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="应用数量"
-                                                value={29}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="服务数量"
-                                                value={36254}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="用户数量"
-                                                value={861}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="访问次数"
-                                                value={135123}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                </Row>
-                                <Row gutter={[16, 16]}>
-                                <Col span={8}>
-                                        <Card >
-                                            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card >
-                                            <div id="cardline"></div>
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card title="Card title" >
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </div>
+                            <p>MatLab服务发布</p>
+                            <Card>
+                                <Form {...layout} name="nest-messages"  validateMessages={validateMessages}>
+                                    <Form.Item name={['user', 'name']} label="服务名称" rules={[{ required: true }]}>
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item name={['user', 'type']} label="服务类型" >
+                                        <Radio.Group onChange={this.onChange} value={this.state.value}>
+                                            <Radio value={1}>公开</Radio>
+                                            <Radio value={2}>私有</Radio>
+                                        </Radio.Group>
+                                    </Form.Item>
+                                    <Form.Item name={['user', 'desfun']} label="服务功能描述">
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item name={['user', 'desfunin']} label="服务输入描述">
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item name={['user', 'desfunout']} label="服务输出描述">
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item name={['user', 'fileupload']} label="算法文件上传">
+                                        <Upload {...props}>
+                                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                                        </Upload>
+                                    </Form.Item>
+                                    <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                                        <Button type="primary" htmlType="submit">
+                                            发布
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
+                                </Card>
                             </Content>
                         </Layout>
                     </Content>
