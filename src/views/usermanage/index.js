@@ -4,6 +4,7 @@ import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
+import 'moment/locale/zh-cn';
 import Reactecharts from 'echarts-for-react';
 import  'echarts/lib/chart/line';
 moment.locale('zh-cn');
@@ -14,12 +15,12 @@ function onPanelChange(value, mode) {
     console.log(value, mode);
 }
 
-class Console extends Component{
+class UserManage extends Component{
     constructor(){
         super();
         this.state = {};
     }
-    
+
     render(){
         return (
                 <Layout>
@@ -145,4 +146,4 @@ class Console extends Component{
         }
 }
     
-export default Console;
+export default UserManage;

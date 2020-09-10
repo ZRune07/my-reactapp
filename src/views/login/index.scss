@@ -1,12 +1,4 @@
-.form-warp{
-    display: inline;
-    height: 50vh;
-    width: 50vh;
-    margin: 10vw;
-    background-color: #ffffff;
-    text-align:center;
-    align-items: center;
-}
+
 .layoutpage{
     align-items: center;
 }
@@ -24,17 +16,15 @@
 }
 .space1{
     size: large;
-
+    align: center;
+    width: 100%;
 }
 
 .cardbasic{
     margin:0;
     top:10vh;
-    left:30vw;
-    right:30vw;
-    width: 40vw;
-    height: 60vh;
-}
-
-.site-page-header{
+    left:35vw;
+    right:35vw;
+    width: 400px;
+    height: 400px;
 }

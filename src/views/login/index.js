@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { PageHeader, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card } from 'antd';
 import "./index.scss";
-
+import { HomeOutlined } from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 
 const layout = {
@@ -19,13 +19,13 @@ const tailLayout = {
     },
 };
   
-    const onFinish = values => {
-      console.log('Success:', values);
-    };
+const onFinish = values => {
+    console.log('Success:', values);
+};
 
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo);
-    };
+const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+};
 
 class Login extends Component{
     constructor(){
@@ -33,19 +33,26 @@ class Login extends Component{
         this.state = {};
     }
 
+    // handleRouterPage = () => {
+    //     App.push({
+    //       pathname:'/console',
+    //       query:{id:1},
+    //       state:{obj: {id:1}}
+    //     })
+    // };
 
     render(){
         return (
-                <Space class="space1">
-                    <PageHeader
+            <>
+                <PageHeader
                         className="site-page-header"
-                        title="登录"
-                        subTitle="请输入账号密码"
-                    />
+                        avatar={<HomeOutlined />}
+                        title="地理信息处理服务协同平台"
+                />
+                
                     <div className = "form-warp">
                             <Card 
                                 hoverable
-                                style={{}}
                                 className = "cardbasic"
                                 {...layout}
                                 name="basic"
@@ -55,6 +62,8 @@ class Login extends Component{
                                 onFinish={onFinish}
                                 onFinishFailed={onFinishFailed}
                                 >
+                                <Space className="space1" direction="vertical">
+                                    <div></div>
                                 <Form.Item
                                     label="用户名"
                                     name="username"
@@ -86,13 +95,15 @@ class Login extends Component{
                                 </Form.Item>
 
                                 <Form.Item {...tailLayout}>
-                                    <Button type="primary" htmlType="submit">
-                                    登录
+                                    <Button type="primary" htmlType="submit" href="/console">
+                                        登录
                                     </Button>
                                 </Form.Item>
+                                </Space>
+                                
                                 </Card>
                             </div>
-                </Space>
+            </>
         )
     }
 }

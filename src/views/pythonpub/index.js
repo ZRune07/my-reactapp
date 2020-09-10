@@ -14,7 +14,7 @@ function onPanelChange(value, mode) {
     console.log(value, mode);
 }
 
-class Console extends Component{
+class PythonPub extends Component{
     constructor(){
         super();
         this.state = {};
@@ -145,4 +145,4 @@ class Console extends Component{
         }
 }
     
-export default Console;
+export default PythonPub;

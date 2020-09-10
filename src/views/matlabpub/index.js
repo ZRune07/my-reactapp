@@ -14,7 +14,7 @@ function onPanelChange(value, mode) {
     console.log(value, mode);
 }
 
-class Console extends Component{
+class MatlabPub extends Component{
     constructor(){
         super();
         this.state = {};
@@ -34,8 +34,8 @@ class Console extends Component{
                             <Sider className="site-layout-background" width={200}>
                                 <Menu
                                     mode="inline"
-                                    defaultSelectedKeys={['1']}
-                                    defaultOpenKeys={['sub1']}
+                                    defaultSelectedKeys={['3']}
+                                    defaultOpenKeys={['sub3']}
                                     style={{ height: '100%' }}
                                 >
                                     <SubMenu key="sub1" icon={<UserOutlined />} title="概览">
@@ -145,4 +145,4 @@ class Console extends Component{
         }
 }
     
-export default Console;
+export default MatlabPub;
