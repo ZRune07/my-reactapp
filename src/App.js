@@ -10,6 +10,8 @@ import  CombinedCall from "./views/combinedcall";
 import  DataInfo  from "./views/datainfo";
 import  Sinfo  from "./views/sinfo";
 import  SingleCall  from "./views/singlecall";
+import UserInfo from "./views/userinfo";
+// import  Register  from "./views/register";
 class App extends React.Component{
   constructor(){
     super();
@@ -29,7 +31,9 @@ class App extends React.Component{
             <Route component={DataInfo} path="/datainfo"/>
             <Route component={Sinfo} path="/sinfo"/>
             <Route component={SingleCall} path="/singlecall"/>
-          </Switch>
+            <Route component={UserInfo} path="/userinfo"/>
+            {/* <Route component={Register} path="/register" /> */}
+          </Switch> 
           {/* HashRouter用URL中的hash部分创建路由，URL中会附带# 不需要处理
           BrowserRouter的URL指向真实的URL地址，上线后需要后台处理URL指向
           switch路径相同的情况下只匹配第一个

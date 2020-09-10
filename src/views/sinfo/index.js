@@ -4,7 +4,6 @@ import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
 import  'echarts/lib/chart/line';
 import Search from "antd/lib/input/Search";
 moment.locale('zh-cn');

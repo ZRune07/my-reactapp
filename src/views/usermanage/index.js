@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import { PageHeader,Table,Tag,Select, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
+import { PageHeader,Table,Tag,Select,Descriptions, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
 import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
 import  'echarts/lib/chart/line';
 import Search from "antd/lib/input/Search";
 moment.locale('zh-cn');
@@ -103,6 +102,9 @@ class UserManage extends Component{
                                 </Menu>
                             </Sider>
                             <Content className="contentmain" style={{ padding: '0 24px'}}>
+                                <Breadcrumb>
+                                    <Breadcrumb.Item><a href="usermanage" >用户管理</a></Breadcrumb.Item>
+                                </Breadcrumb>
                             <div className="site-card-wrapper">
                                 
                                         <Card>
@@ -145,8 +147,8 @@ class UserManage extends Component{
                                                 key="action"
                                                 render={(text, record) => (
                                                     <Space size="middle">
-                                                    <a>操作</a>
-                                                    <a>删除</a>
+                                                        <Button htmlType="submit"  href="/userinfo">操作</Button>
+                                                        <Button>删除</Button>
                                                     </Space>
                                                 )}
                                                 />
