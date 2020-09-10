@@ -34,8 +34,8 @@ class CombinedCall extends Component{
                             <Sider className="site-layout-background" width={200}>
                                 <Menu
                                     mode="inline"
-                                    defaultSelectedKeys={['1']}
-                                    defaultOpenKeys={['sub1']}
+                                    defaultSelectedKeys={['8']}
+                                    defaultOpenKeys={['sub5']}
                                     style={{ height: '100%' }}
                                 >
                                     <SubMenu key="sub1" icon={<UserOutlined />} title="概览">
@@ -66,7 +66,7 @@ class CombinedCall extends Component{
                                     </SubMenu>
                                     <SubMenu key="sub5" icon={<NotificationOutlined />} title="服务调用">
                                         <Menu.Item key="7"><a href="/singlecall"></a>单个服务调用</Menu.Item>
-                                        <Menu.Item key="8"><a href="/combinedcall."></a>组合服务调用</Menu.Item>
+                                        <Menu.Item key="8"><a href="/combinedcall"></a>组合服务调用</Menu.Item>
                                     </SubMenu>
                                 </Menu>
                             </Sider>

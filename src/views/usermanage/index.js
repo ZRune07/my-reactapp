@@ -1,27 +1,58 @@
 import React, {Component} from "react";
-import { PageHeader, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
+import { PageHeader,Table,Tag,Select, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
 import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import Reactecharts from 'echarts-for-react';
 import  'echarts/lib/chart/line';
+import Search from "antd/lib/input/Search";
 moment.locale('zh-cn');
+const { Column, ColumnGroup } = Table;
+const { Option } = Select;
 const { Header, Content, Footer,Sider } = Layout;
 const { SubMenu } = Menu;
+const data = [
+    {
+      key: '1',
+      Name: '张三',
+      phoneNumber: '13153389045',
+      email: '1392695110@qq.com',
+      address: '湖北/武汉/武昌',
+      tags: ['未认证'],
+    },
+    {
+      key: '2',
+      Name: '李四',
+      phoneNumber: '18353360235',
+      email: 'syh@hotmail.com',
+      address: '美国',
 
+      tags: ['已认证'],
+    },
+    {
+      key: '3',
+      Name: '王五',
+      phoneNumber: '17857690917',
+      email: '13456@qq.com',
+      address: '哈萨克斯坦',
+      tags: ['未认证'],
+    },
+  ];
 function onPanelChange(value, mode) {
     console.log(value, mode);
 }
+
 
 class UserManage extends Component{
     constructor(){
         super();
         this.state = {};
     }
-
     render(){
+        const rowSelection = {
+            checkStrictly : 0
+          };
         return (
                 <Layout>
                     <PageHeader
@@ -35,8 +66,8 @@ class UserManage extends Component{
                             <Sider className="site-layout-background" width={200}>
                                 <Menu
                                     mode="inline"
-                                    defaultSelectedKeys={['1']}
-                                    defaultOpenKeys={['sub1']}
+                                    defaultSelectedKeys={['2']}
+                                    defaultOpenKeys={['sub2']}
                                     style={{ height: '100%' }}
                                 >
                                     <SubMenu key="sub1" icon={<UserOutlined />} title="概览">
@@ -67,76 +98,60 @@ class UserManage extends Component{
                                     </SubMenu>
                                     <SubMenu key="sub5" icon={<NotificationOutlined />} title="服务调用">
                                         <Menu.Item key="7"><a href="/singlecall"></a>单个服务调用</Menu.Item>
-                                        <Menu.Item key="8"><a href="/combinedcall."></a>组合服务调用</Menu.Item>
+                                        <Menu.Item key="8"><a href="/combinedcall"></a>组合服务调用</Menu.Item>
                                     </SubMenu>
                                 </Menu>
                             </Sider>
                             <Content className="contentmain" style={{ padding: '0 24px'}}>
                             <div className="site-card-wrapper">
-                                <Row gutter={[16,16]}>
-                                    <Col span={6}>
+                                
+                                        <Card>
+                                            <p>用户搜索</p>
+                                            <Input.Group compact>
+                                                <Select defaultValue="username">
+                                                    <Option value="username">用户名</Option>
+                                                    <Option value="phonenum">手机号</Option>
+                                                </Select>
+                                                <Search style={{ width: '50%' }} placeholder="input search text" enterButton="Search" onSearch={value => console.log(value)}/>
+                                            </Input.Group>
+                                        </Card>
                                         <Card >
-                                            <Statistic
-                                                title="应用数量"
-                                                value={29}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
+                                        <Table dataSource={data} rowSelection={rowSelection}>
+                                                <Column title="姓名" dataIndex="Name" key="Name" />
+                                                <Column title="手机号" dataIndex="phoneNumber" key="phoneNumber" />
+                                                <Column title="邮箱" dataIndex="email" key="email" />
+                                                <Column
+                                                title="认证"
+                                                dataIndex="tags"
+                                                key="tags"
+                                                render={tags => (
+                                                    <>
+                                                    {tags.map(tag => (
+                                                        tag == "已认证" ?
+                                                        <Tag color="green" key={tag}>
+                                                        {tag}
+                                                        </Tag>
+                                                        :
+                                                        <Tag color="red" key={tag}>
+                                                        {tag}
+                                                        </Tag>
+                                                    ))}
+                                                    </>
+                                                )}
+                                                />
+                                                <Column title="所在单位" dataIndex="address" key="address" />
+                                                <Column
+                                                title="操作"
+                                                key="action"
+                                                render={(text, record) => (
+                                                    <Space size="middle">
+                                                    <a>操作</a>
+                                                    <a>删除</a>
+                                                    </Space>
+                                                )}
+                                                />
+                                            </Table>
                                         </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="服务数量"
-                                                value={36254}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="用户数量"
-                                                value={861}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                    <Col span={6}>
-                                        <Card >
-                                            <Statistic
-                                                title="访问次数"
-                                                value={135123}
-                                                precision={0}
-                                                valueStyle={{ color: 'black' }}
-                                                prefix={<AreaChartOutlined />}
-                                            />
-                                        </Card>
-                                    </Col>
-                                </Row>
-                                <Row gutter={[16, 16]}>
-                                <Col span={8}>
-                                        <Card >
-                                            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card >
-                                            <div id="cardline"></div>
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Card title="Card title" >
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                </Row>
                             </div>
                             </Content>
                         </Layout>

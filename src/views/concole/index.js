@@ -66,7 +66,7 @@ class Console extends Component{
                                     </SubMenu>
                                     <SubMenu key="sub5" icon={<NotificationOutlined />} title="服务调用">
                                         <Menu.Item key="7"><a href="/singlecall"></a>单个服务调用</Menu.Item>
-                                        <Menu.Item key="8"><a href="/combinedcall."></a>组合服务调用</Menu.Item>
+                                        <Menu.Item key="8"><a href="/combinedcall"></a>组合服务调用</Menu.Item>
                                     </SubMenu>
                                 </Menu>
                             </Sider>
