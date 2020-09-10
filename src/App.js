@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, HashRouter,BrowserRouter} from 'react-router-dom'
 import './App.scss';
 import Login from './views/login/index';
+import Console from "./views/concole/index";
 
 class App extends React.Component{
   constructor(){
@@ -14,6 +15,7 @@ class App extends React.Component{
         <BrowserRouter>
           <Switch>
             <Route component={Login} exact path="/"/>
+            <Route component={Console} path="/console"/>
           </Switch>
           {/* HashRouter用URL中的hash部分创建路由，URL中会附带# 不需要处理
           BrowserRouter的URL指向真实的URL地址，上线后需要后台处理URL指向
