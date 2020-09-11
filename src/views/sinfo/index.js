@@ -105,7 +105,9 @@ class Sinfo extends Component{
                             </Sider>
                             <Content className="contentmain" style={{ padding: '0 24px'}}>
                             <div className="site-card-wrapper">
-                                <p>处理服务基础信息</p>
+                            <Breadcrumb>
+                                <Breadcrumb.Item><a href="smanage" >服务管理</a></Breadcrumb.Item>
+                            </Breadcrumb>
                                         <Card>
                                             <p>查找服务</p>
                                             <Input.Group compact>
@@ -147,8 +149,8 @@ class Sinfo extends Component{
                                                 key="action"
                                                 render={(text, record) => (
                                                     <Space size="middle">
-                                                    <a>操作</a>
-                                                    <a>删除</a>
+                                                    <Button href="/smanage">操作</Button>
+                                                    <Button>删除</Button>
                                                     </Space>
                                                 )}
                                                 />

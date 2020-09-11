@@ -122,7 +122,9 @@ class DataInfo extends Component{
                             </Sider>
                             <Content className="contentmain" style={{ padding: '0 24px'}}>
                             <div className="site-card-wrapper">
-                                <p>数据信息管理</p>
+                            <Breadcrumb>
+                                <Breadcrumb.Item><a href="datainfo" >数据信息管理</a></Breadcrumb.Item>
+                            </Breadcrumb>
                                         <Card>
                                             <p>查找条目</p>
                                             <Input.Group compact>
@@ -175,7 +177,7 @@ class DataInfo extends Component{
                                                 key="action"
                                                 render={(text, record) => (
                                                     <Space size="middle">
-                                                        <Button>Description</Button>
+                                                        <Button href="/datadescription">Description</Button>
                                                         <Button>Delete</Button>
                                                         <Button>Download</Button>
                                                     </Space>

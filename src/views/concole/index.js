@@ -4,8 +4,7 @@ import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import {HomeOutlined,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
 import moment from 'moment';
-import Reactecharts from 'echarts-for-react';
-import  'echarts/lib/chart/line';
+import echarts from 'echarts';
 moment.locale('zh-cn');
 const { Header, Content, Footer,Sider } = Layout;
 const { SubMenu } = Menu;
@@ -19,7 +18,53 @@ class Console extends Component{
         super();
         this.state = {};
     }
-    
+    componentDidMount() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+        // // 绘制图表
+        myChart.setOption({
+            title: { text: '服务调用排行' },
+            tooltip: {},
+            xAxis: {
+                data: ["服务A", "服务A", "服务A", "服务A", "服务A", "服务A"]
+            },
+            yAxis: {},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        });
+        myChart1.setOption({
+            title: { text: '单位贡献度排行' },
+            tooltip: {},
+            xAxis: {
+                
+            },
+            yAxis: {data: ["单位A", "单位A", "单位A", "单位A", "单位A", "单位A"]},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        });
+        myChart2.setOption({
+            title: { text: '用户贡献排行' },
+            tooltip: {},
+            xAxis: {
+                data: ["用户A", "用户A", "用户A", "用户A", "用户A", "用户A"]
+            },
+            yAxis: {},
+            series: [{
+                name: '',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        });
+    }
+
     render(){
         return (
                 <Layout>
@@ -124,15 +169,21 @@ class Console extends Component{
                                             <Calendar fullscreen={false} onPanelChange={onPanelChange} />
                                         </Card>
                                     </Col>
-                                    <Col span={8}>
+                                    <Col span={16}>
                                         <Card >
-                                            <div id="cardline"></div>
-                                            Card content
+                                            <div id="chart" style={{ width: 800, height: 300 }}></div>
                                         </Card>
                                     </Col>
-                                    <Col span={8}>
-                                        <Card title="Card title" >
-                                            Card content
+                                </Row>
+                                <Row gutter={[16, 16]}>
+                                    <Col span={11}>
+                                        <Card >
+                                            <div id="chart1" style={{ width: 600, height: 300 }}></div>
+                                        </Card>
+                                    </Col>
+                                    <Col span={11}>
+                                        <Card >
+                                            <div id="chart2" style={{ width: 600, height: 300 }}></div>
                                         </Card>
                                     </Col>
                                 </Row>

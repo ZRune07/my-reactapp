@@ -11,6 +11,9 @@ import  DataInfo  from "./views/datainfo";
 import  Sinfo  from "./views/sinfo";
 import  SingleCall  from "./views/singlecall";
 import UserInfo from "./views/userinfo";
+import Smanage from "./views/smanage";
+import DatadeScription from "./views/datadescription";
+import  Srun  from "./views/srun";
 // import  Register  from "./views/register";
 class App extends React.Component{
   constructor(){
@@ -32,6 +35,9 @@ class App extends React.Component{
             <Route component={Sinfo} path="/sinfo"/>
             <Route component={SingleCall} path="/singlecall"/>
             <Route component={UserInfo} path="/userinfo"/>
+            <Route component={Smanage} path="/smanage"/>
+            <Route component={DatadeScription} path="/datadescription"/>
+            <Route component={Srun} path="/srun"/>
             {/* <Route component={Register} path="/register" /> */}
           </Switch> 
           {/* HashRouter用URL中的hash部分创建路由，URL中会附带# 不需要处理
