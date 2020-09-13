@@ -1,53 +1,73 @@
 import React, {Component} from "react";
-import { PageHeader,Table,Tag,Select, Input, Button,Layout, Menu, Breadcrumb,Space, Card } from 'antd';
+import { PageHeader,Table,Modal,Popconfirm, message,Form, Input, Button, Layout, Menu, Breadcrumb,Space, Card } from 'antd';
 import "./index.scss";
 import { UserOutlined, LaptopOutlined, NotificationOutlined, AlignLeftOutlined } from '@ant-design/icons';
 import {HomeOutlined} from '@ant-design/icons';
 import moment from 'moment';
-import  'echarts/lib/chart/line';
 import Search from "antd/lib/input/Search";
 moment.locale('zh-cn');
 const { Column, ColumnGroup } = Table;
-const { Option } = Select;
 const { Header, Content, Footer,Sider } = Layout;
 const { SubMenu } = Menu;
 const data = [
     {
       key: '1',
-      Name: '张三',
-      phoneNumber: '13153389045',
-      email: '1392695110@qq.com',
-      address: '湖北/武汉/武昌',
-      tags: ['未认证'],
+      TagName: '标签1',
+      PictureNumber: '13',
     },
     {
       key: '2',
-      Name: '李四',
-      phoneNumber: '18353360235',
-      email: 'syh@hotmail.com',
-      address: '美国',
-
-      tags: ['已认证'],
+      TagName: '标签2',
+      PictureNumber: '18',
     },
     {
       key: '3',
-      Name: '王五',
-      phoneNumber: '17857690917',
-      email: '13456@qq.com',
-      address: '哈萨克斯坦',
-      tags: ['未认证'],
+      TagName: '标签3',
+      PictureNumber: '17',
     },
   ];
 function onPanelChange(value, mode) {
     console.log(value, mode);
 }
 
+const textconfirm = '确定删除该标签？';
 
-class UserManage extends Component{
+const layout = {
+    labelCol: { span: 0.7 },
+    wrapperCol: { span: 7 },
+  }
+    const onFinish = values => {
+      console.log(values);
+    };
+
+function confirm() {
+  message.info('Clicked on Yes.');
+}
+
+class formmanage extends Component{
     constructor(){
         super();
-        this.state = {};
+        this.state = {visible: false};
     }
+    // showModal = () => {
+    //     this.setState({
+    //       visible: true,
+    //     });
+    //   };
+    
+    //   handleOk = e => {
+    //     console.log(e);
+    //     this.setState({
+    //       visible: false,
+    //     });
+    //   };
+    
+    //   handleCancel = e => {
+    //     console.log(e);
+    //     this.setState({
+    //       visible: false,
+    //     });
+    //   };
     render(){
         const rowSelection = {
             checkStrictly : 0
@@ -65,8 +85,8 @@ class UserManage extends Component{
                             <Sider className="site-layout-background" width={200}>
                                 <Menu
                                     mode="inline"
-                                    defaultSelectedKeys={['2']}
-                                    defaultOpenKeys={['sub2']}
+                                    defaultSelectedKeys={['10']}
+                                    defaultOpenKeys={['sub5']}
                                     style={{ height: '100%' }}
                                 >
                                     <SubMenu key="sub1" icon={<UserOutlined />} title="概览">
@@ -103,63 +123,63 @@ class UserManage extends Component{
                                         <Menu.Item key="7"><a href="/singlecall"></a><AlignLeftOutlined />单个服务调用</Menu.Item>
                                         <Menu.Item key="8"><a href="/combinedcall"></a><AlignLeftOutlined />组合服务调用</Menu.Item>
                                         <Menu.Item key="9"><a href="/picturemanage"></a><AlignLeftOutlined />图片管理</Menu.Item>
+                                        <Menu.Item key="10"><a href="/formmanage"></a><AlignLeftOutlined />表单管理</Menu.Item>
                                     </SubMenu>
                                 </Menu>
                             </Sider>
-                            <Content className="contentmain" style={{ padding: '0 24px'}}>
-                                <Breadcrumb>
-                                    <Breadcrumb.Item><a href="usermanage" >用户管理</a></Breadcrumb.Item>
-                                </Breadcrumb>
+                        <Content className="contentmain" style={{ padding: '0 24px' }}>
+                            <Breadcrumb>
+                                <Breadcrumb.Item><a href="/formmanage" >表单管理</a></Breadcrumb.Item>
+                                <Breadcrumb.Item>编辑表单</Breadcrumb.Item>
+                            </Breadcrumb>
                             <div className="site-card-wrapper">
-                                
-                                        <Card>
-                                            <p>用户搜索</p>
-                                            <Input.Group compact>
-                                                <Select defaultValue="username">
-                                                    <Option value="username">用户名</Option>
-                                                    <Option value="phonenum">手机号</Option>
-                                                </Select>
-                                                <Search style={{ width: '26%' }} placeholder="请输入内容" enterButton="查询" onSearch={value => console.log(value)}/>
-                                            </Input.Group>
-                                        </Card>
-                                        <Card >
-                                        <Table dataSource={data} rowSelection={rowSelection}>
-                                                <Column title="姓名" dataIndex="Name" key="Name" />
-                                                <Column title="手机号" dataIndex="phoneNumber" key="phoneNumber" />
-                                                <Column title="邮箱" dataIndex="email" key="email" />
-                                                <Column
-                                                title="认证"
-                                                dataIndex="tags"
-                                                key="tags"
-                                                render={tags => (
-                                                    <>
-                                                    {tags.map(tag => (
-                                                        tag == "已认证" ?
-                                                        <Tag color="green" key={tag}>
-                                                        {tag}
-                                                        </Tag>
-                                                        :
-                                                        <Tag color="red" key={tag}>
-                                                        {tag}
-                                                        </Tag>
-                                                    ))}
-                                                    </>
-                                                )}
-                                                />
-                                                <Column title="所在单位" dataIndex="address" key="address" />
-                                                <Column
-                                                title="操作"
-                                                key="action"
-                                                render={(text, record) => (
-                                                    <Space size="middle">
-                                                        <Button htmlType="submit"  href="/userinfo">操作</Button>
+                                <Card>
+                                <Form {...layout}
+                                 name="nest-messages" 
+                                 onFinish={onFinish} 
+                                >
+                                    <Form.Item name={['user', 'website']} label="标题">
+                                        <Input />
+                                    </Form.Item>
+                                    <Form.Item name={['user', 'introduction']} label="描述">
+                                        <Input.TextArea />
+                                    </Form.Item>
+                                    </Form>
+                                    <p>表单：</p> 
+                                        <Table dataSource={data} 
+                                        // rowSelection={rowSelection}
+                                        // hideSelectAll="true"
+                                        >
+                                                <Column title="排序" dataIndex="TagName" key="TagName"  align="center"/>
+                                                <Column title="类型" dataIndex="PictureNumber" key="PictureNumber"  align="center" />
+                                                <Column title="必填/选填" dataIndex="TagName" key="TagName"  align="center"/>
+                                                <Column title="字段名称" dataIndex="TagName" key="TagName"  align="center"/>
+                                                <Column title="填写提示" dataIndex="TagName" key="TagName"  align="center"/>
+                                        <Column
+                                            title="操作"
+                                            align="center"
+                                            key="action"
+                                            render={(text, record) => (
+                                                <Space size="middle">
+                                                    <Button onClick={this.showModal}>编辑</Button>
+                                                    <Modal
+                                                        title="编辑标签"
+                                                        cancelText="取消"
+                                                        okText="确定"
+                                                        visible={this.state.visible}
+                                                        onOk={this.handleOk}
+                                                        onCancel={this.handleCancel}
+                                                    >
+                                                        <Input defaultValue="标签1" allowClear="true" />
+                                                    </Modal>
+                                                    <Popconfirm placement="left" title={textconfirm} onConfirm={confirm} okText="Yes" cancelText="No">
                                                         <Button>删除</Button>
+                                                    </Popconfirm>
                                                     </Space>
                                                 )}
                                                 />
                                             </Table>
-                                            <Button type="dashed">导出</Button>
-                                        </Card>
+                                            </Card>
                             </div>
                             </Content>
                         </Layout>
@@ -169,4 +189,4 @@ class UserManage extends Component{
         }
 }
     
-export default UserManage;
+export default formmanage;

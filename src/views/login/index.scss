@@ -15,7 +15,6 @@
     height:100%;
 }
 .space1{
-    size: large;
     align: center;
     width: 100%;
 }
@@ -23,8 +22,18 @@
 .cardbasic{
     margin:0;
     top:10vh;
-    left:35vw;
-    right:35vw;
+    left:40vw;
+    right:40vw;
     width: 400px;
     height: 400px;
+}
+
+.divcenter{
+    font-size:x-large;
+    font-family:"黑体";
+    cursor:text;
+    text-align: center;
+}
+.divcen{
+    align-items: center;
 }

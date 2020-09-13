@@ -1,24 +1,24 @@
-import React, {Component} from "./node_modules/react";
-import { PageHeader, Form, Input, Button, Checkbox,Layout, Menu, Breadcrumb,Space, Card } from './node_modules/antd';
+import React, { Component } from "react";
+import { PageHeader, Form, Input, Button, Checkbox, Layout, Menu, Breadcrumb, Space, Card, Col, Row } from 'antd';
 import "./index.scss";
-import { HomeOutlined } from './node_modules/@ant-design/icons';
+import { HomeOutlined } from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 
 const layout = {
     labelCol: {
-      span: 8,
+        span: 8,
     },
     wrapperCol: {
-      span: 16,
+        span: 16,
     },
 };
 const tailLayout = {
     wrapperCol: {
-    offset: 8,
-    span: 16,
+        offset: 8,
+        span: 16,
     },
 };
-  
+
 const onFinish = values => {
     console.log('Success:', values);
 };
@@ -27,8 +27,8 @@ const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
 };
 
-class Register extends Component{
-    constructor(){
+class Register extends Component {
+    constructor() {
         super();
         this.state = {};
     }
@@ -41,68 +41,102 @@ class Register extends Component{
     //     })
     // };
 
-    render(){
+    render() {
         return (
             <>
                 <PageHeader
-                        className="site-page-header"
-                        avatar={<HomeOutlined />}
-                        title="地理信息处理服务协同平台"
+                    className="site-page-header"
+                    avatar={<HomeOutlined />}
+                    title="地理信息处理服务协同平台"
                 />
-                
-                    <div className = "form-warp">
-                            <Card 
-                                hoverable
-                                className = "cardbasic"
-                                {...layout}
-                                name="basic"
-                                initialValues={{
-                                    remember: true,
-                                }}
-                                onFinish={onFinish}
-                                onFinishFailed={onFinishFailed}
-                                >
-                                <Space className="space1" direction="vertical">
-                                    <div></div>
+
+                <div className="form-warp">
+                    <Card
+                        hoverable
+                        className="cardbasic"
+                    >
+
+                        <div></div>
+                        <h4 className="h4center">注册</h4>
+                        <Row>
+                            <Col span={5}>
                                 <Form.Item
                                     label="用户名"
                                     name="username"
                                     rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your username!',
-                                    },
+                                        {
+                                            required: true,
+                                            message: 'Please input your username!',
+                                        },
                                     ]}
                                 >
-                                    <Input />
-                                </Form.Item>
 
+                                </Form.Item> </Col>
+                            <Col span={16}> <Input /></Col>
+                        </Row>
+                        <Row>
+                            <Col span={5}>
                                 <Form.Item
                                     label="密码"
                                     name="password"
                                     rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your password!',
-                                    },
+                                        {
+                                            required: true,
+                                            message: 'Please input your password!',
+                                        },
                                     ]}
                                 >
-                                    <Input.Password />
-                                </Form.Item>
 
-                                <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                                    <Checkbox>Remember me</Checkbox>
-                                </Form.Item>
+                                </Form.Item> </Col>
+                            <Col span={16}> <Input.Password /></Col>
+                        </Row>
+                        <Row>
+                            <Col span={5}>
+                                <Form.Item
+                                    label="单位"
+                                    name="company"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your company!',
+                                        },
+                                    ]}
+                                >
 
-                                <Form.Item {...tailLayout}>
-                                    <Button type="primary" htmlType="submit" href="/console">
-                                        登录
-                                    </Button>
-                                </Form.Item>
-                                </Space>
-                                
-                                </Card>
-                            </div>
+                                </Form.Item> </Col>
+                            <Col span={16}>  <Input /></Col>
+                        </Row>
+                        <Row>
+                            <Col span={5}>
+                                <Form.Item
+                                    label="国家"
+                                    name="country"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your country!',
+                                        },
+                                    ]}
+                                >
+                                </Form.Item></Col>
+                            <Col span={16}>  <Input /></Col>
+                        </Row>
+                        <Form.Item {...tailLayout}>
+                            <Space>
+                                <Button type="primary" htmlType="submit" href="/register" size="middle" className="register" >
+                                    快速注册
+                                        </Button>
+                                <Button type="primary" htmlType="submit" href="/" size="middle">
+                                    直接登录
+                                        </Button>
+                            </Space>
+                        </Form.Item>
+                        <p className="pname">点击“快速注册”，即代表同意<a link="#">《用户服务协议》</a></p>
+
+
+
+                    </Card>
+                </div>
             </>
         )
     }

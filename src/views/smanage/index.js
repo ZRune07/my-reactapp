@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import { PageHeader, Form, Input, Button,Radio,Upload, message, Checkbox,Layout, Menu,InputNumber, Breadcrumb,Space, Card,Col, Row, Statistic,Calendar } from 'antd';
+import { PageHeader, Form, Input, Button,Radio,Upload, message, Layout, Menu, Breadcrumb, Card } from 'antd';
 import "./index.scss";
-import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined,UploadOutlined ,SettingFilled,SmileOutlined,SyncOutlined,LoadingOutlined,AreaChartOutlined} from '@ant-design/icons';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, HomeOutlined,UploadOutlined ,AlignLeftOutlined } from '@ant-design/icons';
 import moment from 'moment';
 moment.locale('zh-cn');
 const { Header, Content, Footer,Sider } = Layout;
@@ -76,32 +76,37 @@ class Smanage extends Component{
                                     <SubMenu key="sub1" icon={<UserOutlined />} title="概览">
                                         <Menu.Item key="1" >
                                             <a href="/console"></a>
+                                            <AlignLeftOutlined />
                                             工作台
                                         </Menu.Item>
                                     </SubMenu>
                                     <SubMenu key="sub2" icon={<LaptopOutlined />} title="用户管理">
                                         <Menu.Item key="2">
                                             <a href="/usermanage"></a>
+                                            <AlignLeftOutlined />
                                             用户管理
                                         </Menu.Item>
                                     </SubMenu>
                                     <SubMenu key="sub3" icon={<NotificationOutlined />} title="服务发布">
                                         <Menu.Item key="3">
                                             <a href="/matlabpub"></a>
+                                            <AlignLeftOutlined />
                                             MATLAB程序发布
                                         </Menu.Item>
                                         <Menu.Item key="4">
                                             <a href="/pythonpub"></a>
+                                            <AlignLeftOutlined />
                                             Python程序发布
                                         </Menu.Item>
                                     </SubMenu>
                                     <SubMenu key="sub4" icon={<NotificationOutlined />} title="服务管理">
-                                        <Menu.Item key="5"><a href="/sinfo"></a>服务信息</Menu.Item>
-                                        <Menu.Item key="6"><a href="/datainfo"></a>数据信息</Menu.Item>
+                                        <Menu.Item key="5"><a href="/sinfo"></a><AlignLeftOutlined />服务信息</Menu.Item>
+                                        <Menu.Item key="6"><a href="/datainfo"></a><AlignLeftOutlined />数据信息</Menu.Item>
                                     </SubMenu>
                                     <SubMenu key="sub5" icon={<NotificationOutlined />} title="服务调用">
-                                        <Menu.Item key="7"><a href="/singlecall"></a>单个服务调用</Menu.Item>
-                                        <Menu.Item key="8"><a href="/combinedcall"></a>组合服务调用</Menu.Item>
+                                        <Menu.Item key="7"><a href="/singlecall"></a><AlignLeftOutlined />单个服务调用</Menu.Item>
+                                        <Menu.Item key="8"><a href="/combinedcall"></a><AlignLeftOutlined />组合服务调用</Menu.Item>
+                                        <Menu.Item key="9"><a href="/picturemanage"></a><AlignLeftOutlined />图片管理</Menu.Item>
                                     </SubMenu>
                                 </Menu>
                             </Sider>
@@ -122,13 +127,13 @@ class Smanage extends Component{
                                         </Radio.Group>
                                     </Form.Item>
                                     <Form.Item name={['user', 'desfun']} label="服务功能描述">
-                                        <Input />
+                                        <Input.TextArea />
                                     </Form.Item>
                                     <Form.Item name={['user', 'desfunin']} label="服务输入描述">
-                                        <Input />
+                                        <Input.TextArea />
                                     </Form.Item>
                                     <Form.Item name={['user', 'desfunout']} label="服务输出描述">
-                                        <Input />
+                                        <Input.TextArea />
                                     </Form.Item>
                                     <Form.Item name={['user', 'fileupload']} label="算法文件上传">
                                         <Upload {...props}>
